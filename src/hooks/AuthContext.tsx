@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 interface SignInCredentials  {
   email: string;
@@ -6,6 +6,9 @@ interface SignInCredentials  {
 }
 interface SignUpCredentials extends SignInCredentials {
   name: string;  
+}
+
+interface User extends SignInCredentials, SignUpCredentials {
 }
 
 interface AuthContextData  {
@@ -20,16 +23,56 @@ interface AuthProviderProps  {
 
 export const AuthContext = createContext({} as AuthContextData)
 
-export function AuthProvider({ children }: AuthProviderProps)  {
-  const isAuthenticated = false;
+export function AuthProvider({ children }: AuthProviderProps)  {  
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   function signIn({ email, password }: SignInCredentials) {
-    console.log({ email,password })
+    const storedUser = localStorage.getItem('user')
+
+//Verificando se existe usuario cadastrado
+    if(storedUser)  {
+        const userLogged = JSON.parse(storedUser) as User;
+        
+        if (email === userLogged.email && password === userLogged.password) {
+          setIsAuthenticated(true)
+          sessionStorage.setItem('loggedUser',JSON.stringify(email))
+        }else {
+          alert('usuario ou senha incorretos')
+        }
+      }else {
+        alert('usuário não cadastrado')
+      }
+  }
+/**
+ * função para cadastrar usuario
+ * @param email email do usuario
+ * @param password senha do usuario
+ * @param name nome do usuario
+ */
+function signUp({ email, password, name }: SignUpCredentials) {
+    
+    const user = {
+      name,
+      email,
+      password,
+    }
+     localStorage.setItem('user',JSON.stringify(user))
+     sessionStorage.setItem('loggedUser',JSON.stringify(email))
+
+    setIsAuthenticated(true)
   }
 
-  function signUp({ email,password, name }: SignUpCredentials){
-    console.log({ email, password, name})
-  }
+  useEffect(() => {
+      function loadUserStorageDate() {
+        const storedUser =  sessionStorage.getItem('loggedUser');
+        
+        if(storedUser){
+          const loggedUser = JSON.parse(storedUser) as User;
+          setIsAuthenticated(true)
+        }
+      }
+      loadUserStorageDate();
+    },[]);
 
   return  (
     <AuthContext.Provider value={{ signIn, isAuthenticated, signUp }}>

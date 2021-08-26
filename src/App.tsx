@@ -1,15 +1,13 @@
-import React from 'react';
-
 import { AuthProvider } from './hooks/AuthContext';
 
-import { Login } from './pages/Login';
-import { SignUp } from './pages/SignUp';
+import { AuthRoutes } from './routes';
 import { GlobalStyle } from './styles/global';
 
 function App() {
+  
   return (
-    <AuthProvider>   
-      <Login />    
+    <AuthProvider>  
+       <AuthRoutes />  
       <GlobalStyle />
    </AuthProvider>
   );

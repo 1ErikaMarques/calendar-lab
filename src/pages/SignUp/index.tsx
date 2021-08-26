@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 import { Brand, Button, Input, Label } from '../Login/styles';
-import { Container } from './styled';
+import { Container } from './styles';
 import closeImg from '../../assets/close.svg'
 import { useAuth } from '../../hooks/AuthContext';
 Modal.setAppElement('#root');
