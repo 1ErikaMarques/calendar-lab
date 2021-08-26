@@ -4,11 +4,14 @@ import tw from "tailwind-styled-components"
 export const Container = styled.div`
   display: flex;
   justify-content: center;  
-  margin-top: 12rem; 
+  margin-top: 12rem;  
+`;
+export const Content = styled.div`  
 `;
 
 export const Form = styled.form`
   max-width: 380px;
+  height: 33rem;
   border-radius: 0.25rem;
   background-color: var(--background);
   box-shadow: 0 10px 70px rgb(0 0 0 / 15%);
@@ -30,13 +33,14 @@ export const Input = styled.input`
   border-radius: 0.25rem;
   border: 1px solid var(--gray-light);
   background-color: var(--background);
-  transition: 400ms ease;  
+  transition: 400ms ease;
+  color: (--gray-dark);
 
-  &:hover {
-      background-color: var(--background);
-      outline: none;
-      box-shadow: 0 0 0 4px rgb(91 33 182 / 10%);
-      border-color: var(--purple);
+    &:hover {
+        background-color: var(--background);
+        outline: none;
+        box-shadow: 0 0 0 4px rgb(91 33 182 / 10%);
+        border-color: var(--purple);
     }
     &:focus {
       background-color: var(--background);

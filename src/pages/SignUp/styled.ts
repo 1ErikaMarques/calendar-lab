@@ -3,20 +3,18 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 4rem;
+  align-items: flex-end;
 
-  button {    
+  button {
+    position: absolute;
+    padding-bottom: 4rem;
     border: none;
-    outline: none;
-    cursor: pointer;
+    outline: none;    
+    cursor: pointer;      
 
-      img {
-        width: 120px;
-        height: 20px;
-      }
-
-      h4 {
-      font-size: 1rem;
+      span {        
+      font-size: 1.1rem;
+      font-weight: 500;
       letter-spacing: 0.03rem;
       color: var(--gray-dark);
         &:hover {
