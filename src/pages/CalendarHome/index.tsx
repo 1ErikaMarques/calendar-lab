@@ -1,35 +1,78 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Calendar, DateLocalizer, momentLocalizer, SlotInfo } from 'react-big-calendar';
 import moment from 'moment';
 import Modal from 'react-modal';
+import { useForm } from 'react-hook-form';
+import {v4 as uuidv4} from 'uuid';
 
 import closeImg from '../../assets/close.svg';
-import editImg from '../../assets/edit.svg';
 import trashImg from '../../assets/trash.svg';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Button, Input, Label } from '../Login/styles';
-import { Container } from './styles';
+import { CheckBox, Container, Span } from './styles';
 
 interface CalendarEvent {
-  title: string;
+  title: string;  
+  startDate: string;
+  endDate: string;
   allDay: boolean;
-  startDate: Date;
-  endDate: Date;
   resourceId: string;
 }
 
 export function CalendarHome(){
   const localizer: DateLocalizer = momentLocalizer(moment);
   const [events, setEvents] = useState<CalendarEvent[]>([]);
-  const [event, setEvent] = useState<CalendarEvent>();
+  const [event, setEvent] = useState<CalendarEvent>({} as CalendarEvent);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const { register, handleSubmit, reset, formState: {errors}} = useForm<CalendarEvent>();
 
+  const handleCreateOrEditEvent = (newEventForm: CalendarEvent) => {
+    //verifica se existe id atribuido ao evento e filtra o array antes de adiciona-lo
+    newEventForm.resourceId ? 
+      setEvents([...events.filter(event => event.resourceId !== newEventForm.resourceId), newEventForm]) :
+      //caso seja um novo evento, atribui um novo id para ele
+      setEvents([...events, {
+        title: newEventForm.title,
+        startDate: newEventForm.startDate,
+        endDate: newEventForm.endDate,
+        allDay: newEventForm.allDay,
+        resourceId: uuidv4()
+      }])
+    handleCloseModal()  
+  }
+/**
+ * cadastra evento
+ * @param slotInfo informação do dia selecionado
+ */
   function handleRegisterEvent(slotInfo : SlotInfo) {
+    reset(event)
     handleOpenModal()
   }
+/**
+ * atualiza estado do evento que será exibido no formulario
+ * @param event dados do evento cadastrado
+ */
   function handleEvent(event: CalendarEvent) {
-   console.log(event)
+   setEvent(event)
+  }
+
+//recuperando informações do evento e atualizando o formulario 
+  useEffect(() => {
+    //verifica se o evento atualizado ja existe
+    if(event.resourceId){ 
+      handleOpenModal()
+      reset(event)  
+    }
+  },[event])
+/**
+ * remove evento do calendario
+ * @param resourceId id do evento
+ */
+  function handleRemoveEvent(resourceId: string|undefined){
+    //atualiza o estado dos eventos e remove o evento solicitado
+    setEvents([...events.filter(event => event.resourceId !== resourceId)])
+    handleCloseModal()  
   }
 
   function handleOpenModal() {    
@@ -38,6 +81,8 @@ export function CalendarHome(){
 
   function handleCloseModal() {
     setIsOpen(false)
+    //setando o estado inicial
+    setEvent({} as CalendarEvent)
   }
 
   return(
@@ -49,6 +94,7 @@ export function CalendarHome(){
         defaultView='month'
         startAccessor="startDate"
         endAccessor="endDate"
+        allDayAccessor="allDay"
         selectable={true}
         onDoubleClickEvent={handleEvent}
         onSelectSlot={handleRegisterEvent}
@@ -69,48 +115,46 @@ export function CalendarHome(){
 
           <button
             type="button" 
-            onClick={handleCloseModal}             
+            onClick={() => handleRemoveEvent(event?.resourceId)} 
+            className="delete-event"            
           >
             <img src={trashImg} alt="Apagar evento" />
           </button>
-        <form>
-          <Label htmlFor="description">Descrição      
-          <Input 
-            name="description"
-            type="text" 
-            value={event?.title}
-            
+        <form onSubmit={handleSubmit(handleCreateOrEditEvent)}>
+          <Label htmlFor="title">Descrição      
+          <Input           
+            type="text"          
+            {...register("title",{required:true})}          
           />
+          {errors.title && <Span>Descrição obrigatória</Span>}
           </Label>
           
-          <Label htmlFor="start-date">Inicio
-          <Input 
-            name="start-date" 
-            type="datetime-local" 
-            value={event?.startDate.getDate()}
+          <Label htmlFor="startDate">Inicio
+          <Input          
+            type="datetime-local"          
+            {...register("startDate")}
+          />
+          {errors.title && <Span>Data de inicio obrigatória</Span>}
+          </Label>
+
+          <Label htmlFor="endDate">Fim
+          <Input          
+            type="datetime-local"          
+            {...register("endDate")}
           />
           </Label>
 
-          <Label htmlFor="end-date">Fim
-          <Input
-            name="end-date" 
-            type="datetime-local" 
-            value={event?.endDate.getDate()}
-          />
-          </Label>
-
-          <Label htmlFor="all-day">
-          <input 
-            name="all-day" 
-            type="checkbox"
-            checked={event?.allDay}
+          <Label htmlFor="allDay">
+          <CheckBox           
+            type="checkbox"          
+            {...register("allDay")}
           />
           Dia todo
           </Label>
 
           <input 
-            type="hidden"
-            value={event?.resourceId}
+            type="hidden"          
+            {...register("resourceId")}
           />
           <Button>Cadastrar</Button>
         </form>

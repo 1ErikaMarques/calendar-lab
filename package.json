@@ -8,9 +8,11 @@
     "react": "17.0.2",
     "react-big-calendar": "^0.35.0",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.14.0",
     "react-modal": "^3.14.3",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -48,6 +50,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-modal": "^3.12.1",
     "@types/styled-components": "^5.1.12",
+    "@types/uuid": "^8.3.1",
     "autoprefixer": "^9",
     "postcss": "^7",
     "tailwind-styled-components": "^2.0.3",

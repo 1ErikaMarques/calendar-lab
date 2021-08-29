@@ -69,9 +69,10 @@ export const GlobalStyle = createGlobalStyle`
     position: relative;
     border-radius: 0.25rem;
   }
-  img {
-    position: relative;
-    
+  .close-modal {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
     border: 0;
     background: transparent;
     transition: filter 0.2s;
@@ -80,4 +81,17 @@ export const GlobalStyle = createGlobalStyle`
       filter: brightness(0.8);
     }
   }
+  .delete-event {
+    position: absolute;
+    right: 4rem;
+    top: 1rem;
+    border: 0;
+    background: transparent;    
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+  
 `;
