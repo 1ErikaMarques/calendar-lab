@@ -5,7 +5,7 @@ interface SignInCredentials  {
   password: string;
 }
 interface SignUpCredentials extends SignInCredentials {
-  name: string;  
+  name: string;
 }
 
 interface User extends SignInCredentials, SignUpCredentials {
@@ -23,7 +23,7 @@ interface AuthProviderProps  {
 
 export const AuthContext = createContext({} as AuthContextData)
 
-export function AuthProvider({ children }: AuthProviderProps)  {  
+export function AuthProvider({ children }: AuthProviderProps)  { 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   function signIn({ email, password }: SignInCredentials) {
@@ -32,7 +32,7 @@ export function AuthProvider({ children }: AuthProviderProps)  {
 //Verificando se existe usuario cadastrado
     if(storedUser)  {
         const userLogged = JSON.parse(storedUser) as User;
-        
+
         if (email === userLogged.email && password === userLogged.password) {
           setIsAuthenticated(true)
           sessionStorage.setItem('loggedUser',JSON.stringify(email))
@@ -43,14 +43,15 @@ export function AuthProvider({ children }: AuthProviderProps)  {
         alert('usuário não cadastrado')
       }
   }
+
 /**
  * função para cadastrar usuario
  * @param email email do usuario
  * @param password senha do usuario
  * @param name nome do usuario
  */
-function signUp({ email, password, name }: SignUpCredentials) {
-    
+  function signUp({ email, password, name }: SignUpCredentials) {
+
     const user = {
       name,
       email,
@@ -72,9 +73,9 @@ function signUp({ email, password, name }: SignUpCredentials) {
         }
       }
       loadUserStorageDate();
-    },[]);
+  },[]);
 
-  return  (
+  return(
     <AuthContext.Provider value={{ signIn, isAuthenticated, signUp }}>
       {children}
     </AuthContext.Provider>

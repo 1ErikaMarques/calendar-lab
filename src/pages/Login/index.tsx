@@ -20,7 +20,7 @@ export function Login() {
   const { signIn } = useAuth();
 
   function handleSubmit(event: FormEvent) {
-    event.preventDefault();  
+    event.preventDefault();
 
     const data = {
       email,
@@ -40,7 +40,7 @@ export function Login() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             name="email"
-            required              
+            required        
           />
         </Label>
 
@@ -48,16 +48,16 @@ export function Login() {
           <Input
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}            
-            name="password"            
+            onChange={e => setPassword(e.target.value)}        
+            name="password"     
             required
           />
         </Label>
 
-          <Button form="sign-in" type="submit">Entrar</Button>              
+          <Button form="sign-in" type="submit">Entrar</Button>             
         </Form>
         <SignUp />
-      </Content>      
+      </Content>   
   </Container>
   )
 }

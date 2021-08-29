@@ -4,7 +4,10 @@ import { Brand, Button, Input, Label } from '../Login/styles';
 import { Container } from './styles';
 import closeImg from '../../assets/close.svg'
 import { useAuth } from '../../hooks/AuthContext';
+
+//adicionando para acessibilidade da modal
 Modal.setAppElement('#root');
+
 export function SignUp()  {
   const[modalIsOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
@@ -42,50 +45,45 @@ export function SignUp()  {
         isOpen={modalIsOpen}
         onRequestClose={handleCloseModal}
         overlayClassName="react-modal-overlay"
-        className="react-modal-content"
-        
+        className="react-modal-content"        
       >        
         <Brand>CalendarLab</Brand>
         <form id="sign-up" onSubmit={handleSubmit}>
           <button 
             type="button" 
             onClick={handleCloseModal} 
-            className="react-modal-close"
+            className="close-modal"
           >
             <img src={closeImg} alt="Fechar modal" />
           </button>
-          <Label>Nome
+          <Label htmlFor="name">Nome</Label>
             <Input
+              name="name"
               value={name}
               onChange={e => setName(e.target.value)}
               required
-            >        
-            </Input>
-          </Label>
+            />          
+          
 
-          <Label>Email
+          <Label htmlFor="email">Email</Label>
             <Input
+              name="email"
               type="email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
-              name="email"
+              onChange={e => setEmail(e.target.value)}            
               required
-            >
-          </Input>
-          </Label>
+            />          
+          
 
-          <Label>Senha
+          <Label htmlFor="password">Senha</Label>
             <Input
+              name="password"
               type="password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
-              name="password"         
+              onChange={e => setPassword(e.target.value)}                     
               required
-            >
-            </Input>
-          </Label>
-
-          <Button >Cadastrar</Button>
+            />
+            <Button >Cadastrar</Button>
         </form>
 
       </Modal>
