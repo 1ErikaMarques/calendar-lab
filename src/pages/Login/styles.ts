@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import tw from "tailwind-styled-components"
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;  
   margin-top: 12rem;  
 `;
-export const Content = styled.div`  
-`;
+
+export const Content = styled.div``;
 
 export const Form = styled.form`
   max-width: 380px;
@@ -68,22 +67,22 @@ export const Button = styled.button`
   width: 100%;
   margin: 1.5rem 0 3rem 0;
   padding: 0.7rem ;
-  background-color: var(--background);
-  color: var(--purple);
+  background-color: var(--purple);
+  color: #FFF;
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border-radius: 4px;
   border: 1px solid var(--purple);
-  transition: border-color 0.2s;
+  transition: filter 0.2s;
   cursor: pointer;
 
     &:hover {
       transition: 0.25s;
-      box-shadow: inset 20em 0 0 0 var(--purple);
-      color: var(--background);
+      
+      filter: brightness(0.8);
     }
-
+    
     &:focus {
       transition: 0.25s;
       box-shadow: inset 22em 0 0 0 var(--purple);

@@ -93,5 +93,15 @@ export const GlobalStyle = createGlobalStyle`
       filter: brightness(0.8);
     }
   }
+
+  .rbc-today{
+    background-color: #EDE9FE!important;
+  }
+  .rbc-event, .rbc-background-event, .rbc-selected{
+    background-color: #5B21B6!important;
+      &:focus{
+        outline: 5px auto #4C1D95!important;
+      }   
+  }
   
 `;

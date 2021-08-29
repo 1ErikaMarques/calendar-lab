@@ -13,8 +13,9 @@ interface User extends SignInCredentials, SignUpCredentials {
 
 interface AuthContextData  {
   signIn(credentials: SignInCredentials): void;
-  signUp(credentials: SignUpCredentials): void;
+  signUp(credentials: SignUpCredentials): void;  
   isAuthenticated: boolean;
+  logout(): void;
 }
 
 interface AuthProviderProps  {
@@ -63,6 +64,10 @@ export function AuthProvider({ children }: AuthProviderProps)  {
     setIsAuthenticated(true)
   }
 
+  function logout(){
+    sessionStorage.clear()
+    setIsAuthenticated(false)
+  }
   useEffect(() => {
       function loadUserStorageDate() {
         const storedUser =  sessionStorage.getItem('loggedUser');
@@ -76,7 +81,7 @@ export function AuthProvider({ children }: AuthProviderProps)  {
   },[]);
 
   return(
-    <AuthContext.Provider value={{ signIn, isAuthenticated, signUp }}>
+    <AuthContext.Provider value={{ signIn, isAuthenticated, signUp, logout }}>
       {children}
     </AuthContext.Provider>
   )
