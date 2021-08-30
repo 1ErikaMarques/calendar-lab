@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -10,19 +10,20 @@ export const Container = styled.div`
     padding-bottom: 4rem;
     background-color: transparent;
     border: none;
-    outline: none;    
-    cursor: pointer;      
+    outline: none;
+    cursor: pointer;
 
-      span {        
+    span {
       font-size: 1.1rem;
       font-weight: 500;
       letter-spacing: 0.03rem;
       color: var(--gray-dark);
-        &:hover {
-          color: var(--purple);        
-    }     
-  }      
-}
+
+      &:hover {
+        color: var(--purple);
+      }
+    }
+  }
 `;
 
 

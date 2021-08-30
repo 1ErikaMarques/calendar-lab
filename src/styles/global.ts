@@ -7,28 +7,29 @@ export const GlobalStyle = createGlobalStyle`
     --red: #DC2626;
 
     --gray-light: #E9E9E9;
-    --gray-medium:#969CB3;
-    --gray-dark: #363F5F;  
+    --gray-medium: #969CB3;
+    --gray-dark: #363F5F;
   }
-   *{
+
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  
-  html{
-    @media (max-width:1080px) {
+
+  html {
+    @media (max-width: 1080px) {
       font-size: 93.75%;
     }
 
-    @media (max-width:720px)  {
-      font-size: 87.5%; 
+    @media (max-width: 720px) {
+      font-size: 87.5%;
     }
   }
 
   body {
     background: var(--background);
-    -webkit-font-smoothing: antialiased;   
+    -webkit-font-smoothing: antialiased;
   }
 
   body, input, textarea, button {
@@ -45,11 +46,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   [disabled] {
-    opacity:  0.6;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
-   .react-modal-overlay{
+  .react-modal-overlay {
     background: rgba(0, 0, 0, 0.5);
     position: fixed;
     z-index: 4;
@@ -59,9 +60,10 @@ export const GlobalStyle = createGlobalStyle`
     left: 0;
     display: flex;
     align-items: center;
-    justify-content: center;    
-   }
-   .react-modal-content{
+    justify-content: center;
+  }
+
+  .react-modal-content {
     width: 100%;
     max-width: 430px;
     background: var(--background);
@@ -69,6 +71,7 @@ export const GlobalStyle = createGlobalStyle`
     position: relative;
     border-radius: 0.25rem;
   }
+
   .close-modal {
     position: absolute;
     right: 1.5rem;
@@ -81,17 +84,16 @@ export const GlobalStyle = createGlobalStyle`
       filter: brightness(0.8);
     }
   }
-  .delete-event {
-    
+
+  .rbc-today {
+    background-color: #EDE9FE !important;
   }
-  
-  .rbc-today{
-    background-color: #EDE9FE!important;
+
+  .rbc-event, .rbc-background-event, .rbc-selected {
+    background-color: #5B21B6 !important;
+
+    &:focus {
+      outline: 5px auto #4C1D95 !important;
+    }
   }
-  .rbc-event, .rbc-background-event, .rbc-selected{
-    background-color: #5B21B6!important;
-      &:focus{
-        outline: 5px auto #4C1D95!important;
-      }   
-  }  
 `;
