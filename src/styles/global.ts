@@ -82,18 +82,9 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   .delete-event {
-    position: absolute;
-    right: 4rem;
-    top: 1rem;
-    border: 0;
-    background: transparent;    
-    transition: filter 0.2s;
-
-    &:hover {
-      filter: brightness(0.8);
-    }
+    
   }
-
+  
   .rbc-today{
     background-color: #EDE9FE!important;
   }
@@ -102,6 +93,5 @@ export const GlobalStyle = createGlobalStyle`
       &:focus{
         outline: 5px auto #4C1D95!important;
       }   
-  }
-  
+  }  
 `;

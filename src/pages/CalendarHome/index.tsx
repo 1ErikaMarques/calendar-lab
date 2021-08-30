@@ -13,7 +13,7 @@ import logoutImg from '../../assets/logout.svg';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Button, Input, Label } from '../Login/styles';
-import { CheckBox, Container, Span } from './styles';
+import { CheckBox, Container, DeleteEvent, Logout, Span, UserInfo } from './styles';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -27,14 +27,16 @@ interface CalendarEvent {
   resourceId: string;
 }
 
-export function CalendarHome(){
+export function CalendarHome() {
   const localizer: DateLocalizer = momentLocalizer(moment);
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [event, setEvent] = useState<CalendarEvent>({} as CalendarEvent);
   const [modalIsOpen, setIsOpen] = useState(false);
   const {register, handleSubmit, reset, formState: {errors}} = useForm<CalendarEvent>();
+  const [greeting, setGreeting] = useState('')
+  const { logout, user } = useAuth()
   const localStorageKey = 'events';
-  const { logout } = useAuth();
+  ;
 
   /**
    * Cria ou edita um evento e valida sobreposição de eventos
@@ -124,6 +126,20 @@ export function CalendarHome(){
       setEvents(JSON.parse(storedEvents))
     }  
   },[])
+  
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+
+    if(currentHour < 12)  {
+      setGreeting('Bom Dia')
+    }
+    else if(currentHour >= 12 && currentHour < 18)  {
+      setGreeting('Boa Tarde')
+    }else {
+      setGreeting('Boa Noite')
+    }
+    
+  }, [])
 /**
  * remove evento do calendario
  * @param resourceId id do evento
@@ -146,15 +162,20 @@ export function CalendarHome(){
 
   return(
     <Container>
-      <button
-        type="button" 
-        onClick={logout}      
-      >
-        <img src={logoutImg} alt="Logout" />
-      </button>
+      <UserInfo>
+        <span>{greeting}, {user.name.split(' ')[0]} </span>
+        <Logout
+          type="button" 
+          onClick={logout}
+          className="logout"
+          title="sair"     
+        >
+          <img src={logoutImg} alt="Logout" />
+        </Logout>
+      </UserInfo>
       <Calendar
         events={events}
-        style={{height: 800, minHeight: 600}}
+        style={{height: 800, minHeight: 600, marginTop: 50}}
         localizer={localizer}
         defaultView='month'
         startAccessor="startDate"
@@ -190,13 +211,13 @@ export function CalendarHome(){
             <img src={closeImg} alt="Fechar modal" />
           </button>
 
-          <button
+          <DeleteEvent
             type="button" 
             onClick={() => handleRemoveEvent(event?.resourceId)} 
-            className="delete-event"            
+                        
           >
             <img src={trashImg} alt="Apagar evento" />
-          </button>
+          </DeleteEvent>
         <form onSubmit={handleSubmit(handleCreateOrEditEvent)}>
           <Label htmlFor="title">Descrição      
           <Input           
@@ -234,7 +255,7 @@ export function CalendarHome(){
             type="hidden"          
             {...register("resourceId")}
           />
-          <Button>Cadastrar</Button>
+          <Button>Salvar</Button>
         </form>
       </Modal>
     </Container>
