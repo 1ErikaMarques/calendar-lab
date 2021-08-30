@@ -162,7 +162,7 @@ export function CalendarHome() {
     return (
         <Container>
             <UserInfo>
-                <span>{greeting}, {user?.name.split(' ')[0]} </span>
+                {user ? <span>{greeting}, {user.name} </span> : ''}
                 <Logout
                     type="button"
                     onClick={logout}
@@ -174,7 +174,7 @@ export function CalendarHome() {
             </UserInfo>
             <Calendar
                 events={events}
-                style={{height: 800, minHeight: 600, marginTop: 50}}
+                style={{height: 800, minHeight: 600, marginTop: 15}}
                 localizer={localizer}
                 defaultView='month'
                 startAccessor="startDate"
@@ -183,16 +183,17 @@ export function CalendarHome() {
                 selectable={true}
                 onDoubleClickEvent={handleEvent}
                 onSelectSlot={handleRegisterEvent}
-                views={["month", "agenda"]}
+                views={["month", "agenda"]} 
                 messages={{
                     next: "Próximo",
                     previous: "Anterior",
                     today: "Hoje",
                     month: "Mês",
+                    agenda: "Lista de eventos",
                     date: "Data",
                     time: "Horário",
                     event: "Evento",
-                    allDay: "Dia inteiro"
+                    allDay: "Dia inteiro"                    
                 }}
             />
             <ToastContainer/>

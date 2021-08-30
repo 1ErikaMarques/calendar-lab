@@ -1,4 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface SignInCredentials {
     email: string;
@@ -14,13 +16,9 @@ interface User extends SignInCredentials, SignUpCredentials {
 
 interface AuthContextData {
     signIn(credentials: SignInCredentials): void;
-
     signUp(credentials: SignUpCredentials): void;
-
     isAuthenticated: boolean;
-
     logout(): void;
-
     user: User;
 }
 
@@ -45,10 +43,14 @@ export function AuthProvider({children}: AuthProviderProps) {
                 setIsAuthenticated(true)
                 sessionStorage.setItem('loggedUser', JSON.stringify(userLogged))
             } else {
-                alert('usuário ou senha incorretos')
+               toast.error("usuário ou senha incorretos",{
+                   theme: "colored"
+               })
             }
         } else {
-            alert('usuário não cadastrado')
+            toast.warning("usuário não cadastrado", {
+                theme: "colored"
+            })
         }
     }
 

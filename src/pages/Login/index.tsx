@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { useAuth } from '../../hooks/AuthContext';
 
 import { SignUp } from '../SignUp';
@@ -31,6 +32,7 @@ export function Login() {
 
     return (
         <Container>
+            <ToastContainer />
             <Content>
                 <Form id="sign-in" onSubmit={handleSubmit}>
                     <Brand>CalendarLab</Brand>

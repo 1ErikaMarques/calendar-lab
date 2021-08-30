@@ -31,16 +31,17 @@ export const UserInfo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 3rem 0 0 0;
 
   span {
-    margin: 2rem 0 0 2rem;
+    margin: 0 0 0 6rem;
     font-size: 1.5rem;
     color: var(--gray-dark)
   }
 `;
 
 export const Logout = styled.button`
-  margin: 2.1rem 6rem 0 0;
+  margin: 0.3rem 6rem 0 0;
   background-color: transparent;
   border: none;
 
