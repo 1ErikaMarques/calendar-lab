@@ -1,5 +1,6 @@
 # Calendário de eventos
 
+# Descrição
 Esta aplicação web permite: 
   * Cadastro de usuário
   * Login para acesso ao sistema
@@ -12,7 +13,7 @@ Esta aplicação web permite:
 # Tecnologias
   * React
     * TypeScript  
-  * CSS:  
+  * CSS
     * Styled Componets
 
 # Dependências
