@@ -147,6 +147,9 @@ export function CalendarHome() {
         //atualiza o estado dos eventos e remove o evento solicitado
         setEvents([...events.filter(event => event.resourceId !== resourceId)])
         handleCloseModal()
+        toast.success("Evento apagado com sucesso", {
+            theme: "colored"
+        })
     }
 
     function handleOpenModal() {
@@ -214,7 +217,6 @@ export function CalendarHome() {
                 <DeleteEvent
                     type="button"
                     onClick={() => handleRemoveEvent(event?.resourceId)}
-
                 >
                     <img src={trashImg} alt="Apagar evento"/>
                 </DeleteEvent>
