@@ -14,7 +14,7 @@ Esta aplicação web permite:
   * React
     * TypeScript  
   * CSS
-    * Styled Componets
+    * Styled Components
 
 # Dependências
   * react-big-calendar
