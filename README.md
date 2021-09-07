@@ -1,22 +1,22 @@
-# Calendário de eventos
+# Calendar of events
 
-# Descrição
-Esta aplicação web permite: 
-  * Cadastro de usuário
-  * Login para acesso ao sistema
+# Description
+This application allows: 
+  * User registration
+  * Log in to access the system
   * Logout
-  * Adicionar eventos
-  * Editar eventos
-  * Remover eventos 
-  * Visualizar a listagem de eventos
+  * Add events
+  * Edit events
+  * Delete events 
+  * View event listing
 
-# Tecnologias
+# Technologies
   * React
     * TypeScript  
   * CSS
     * Styled Components
 
-# Dependências
+# Dependencies
   * react-big-calendar
   * moment
   * react-toastify
